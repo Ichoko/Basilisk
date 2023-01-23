@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body  class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header('Region Detail in ' + ${header.city})}"></header>
+<main>
+    <div class="grid-container">
+        <section class="header-info">
+            <div> City: <span th:text="${header.city}"></span></div>
+            <div> Remark: <span th:text="${header.remark}"></span></div>
+            <a class="blue-button" th:href="@{/region/assignDetailForm(id=${header.id})}">Assign New Salesman</a>
+        </section>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Number</th>
+                <th>Full Name</th>
+                <th>Level</th>
+                <th>Superior</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${dataGrid}" th:object="${row}">
+                <td><a class="blue-button" th:href="@{/region/delete-detail(regionId=${header.id},employeeNumber=*{employeeNumber})}">Delete</a></td>
+                <td th:text="*{employeeNumber}"></td>
+                <td th:text="*{fullName}"></td>
+                <td th:text="*{level}"></td>
+                <td th:text="*{superiorFullName}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="pagination">
+                        <div th:text="|Page ${currentPage} of ${totalPage}|"></div>
+                        <div th:if="${totalPage != 0}">
+                            <a th:each="loop:${#numbers.sequence(1,totalPage)}"
+                               th:text="${loop}"
+                               th:href="@{/region/detail(page=${loop}, id=${header.id},employeeNumber=${employeeNumber})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace = "~{layout :: javascript}"></th:block>
+
+</body>
+</html>

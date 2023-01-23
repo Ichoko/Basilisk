@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body  class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header(${type}+ ' Salesman')}"></header>
+<main>
+  <form class="upsert-form" th:attr="action=@{/salesman/save}" method="post" th:object="${dto}">
+    <input type="hidden" th:name = ${_csrf.parameterName} th:value =${_csrf.token}>
+
+    <!--  <form method="post" class="upsert-form" th:object="${dto}">-->
+    <table>
+      <tbody>
+      <tr>
+        <td><label>Employee Number*</label></td>
+<!--        <td>-->
+<!--          <input type="text" th:field="*{employeeNumber}" >-->
+<!--          <div class="field-validation-error" th:errors="*{employeeNumber}"></div>-->
+<!--        </td>-->
+        <td>
+          <input
+                  th:if="*{employeeNumber != null and employeeNumber != ''}"
+                  type="text"
+                  th:field="*{employeeNumber}"
+                  readonly />
+          <input
+                  th:unless="*{employeeNumber != null and employeeNumber != ''}"
+                  type="text"
+                  th:field="*{employeeNumber}" />
+          <div
+                  class="field-validation-error"
+                  th:errors="*{employeeNumber}"></div>
+          <!-- <div class="field-validation-error" th:errors="${dto}"></div> -->
+      </tr>
+      <tr>
+        <td><label>First Name*</label></td>
+        <td>
+          <input type="text" th:field="*{firstName}">
+          <div class="field-validation-error" th:errors="*{firstName}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Last Name</label></td>
+        <td>
+          <input type="text" th:field="*{lastName}">
+          <div class="field-validation-error" th:errors="*{lastName}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Employee Level*</label></td>
+        <td>
+          <select th:field="*{level}">
+              <option th:value=null>No Specific Level</option>
+              <option th:each="option : ${employeeLevelDropdown}" th:attr="value=${option.value}"
+                      th:text="${option.text}" th:selected="${option.value == employeeLevel}"></option>
+          </select>
+          <div class="field-validation-error" th:errors="*{level}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Birth Date (month/date/year)*</label></td>
+        <td>
+          <input type="date" th:field="*{birthDate}">
+          <div class="field-validation-error" th:errors="*{birthDate}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Hired Date (month/date/year)*</label></td>
+        <td>
+          <input type="date" th:field="*{hiredDate}">
+          <div class="field-validation-error" th:errors="*{hiredDate}"></div>
+<!--          <div class="field-validation-error" th:errors="${salesman}"></div>-->
+        </td>
+      </tr>
+      <tr>
+        <td class="textarea-label"><label>Address</label></td>
+        <td>
+          <textarea th:field="*{address}"></textarea>
+          <div class="field-validation-error" th:errors="*{address}"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><label>City</label></td>
+        <td>
+          <input type="text" th:field="*{city}">
+          <div class="field-validation-error" th:errors="*{city}"></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><label>Phone</label></td>
+        <td>
+          <input type="text" th:field="*{phone}">
+          <div class="field-validation-error" th:errors="*{phone}"></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><label>Superior</label></td>
+        <td>
+          <select th:field="*{superiorEmployeeNumber}">
+            <option th:value=null>No Specific Salesman</option>
+            <option th:each="option : ${salesmanDropdown}" th:value="${option.Value}"
+                    th:text="${option.text}"/>
+          </select>
+          <div class="field-validation-error" th:errors="*{superiorEmployeeNumber}"></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="blue-button" type="submit">Save Salesman</button>
+  </form>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace="~{layout :: javascript}"></th:block>
+</body>
+</html>

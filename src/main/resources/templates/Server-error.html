@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body  class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header ('WARNING!')}"></header>
+<main>
+    <div class="fail-container">
+        <h1>Internal Server Error</h1>
+        <p>
+            Terjadi Kesalahan Silahkan Hubungi Pihak IT Basisilisk
+        </p>
+        <p>Hubungi Admins</p>
+        <p th:text="${errorMessege}"></p>
+    </div>
+    <a class="blue-button" th:href="@{/}">back to Landing Page</a>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

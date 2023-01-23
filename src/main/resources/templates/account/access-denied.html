@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org" lang="en">
+<head th:replace="~{login-layout :: head}"></head>
+<body  class="authentication-body">
+<div class="authentication-wrapper">
+    <header th:replace = "~{login-layout :: header}"></header>
+    <main>
+        <h1>Acces Denied</h1>
+        <p> Anda Tidak authorize untuk mengakses laman ini, silahkan hubungi admin untuk detail privilage</p>
+        <div class="link-container">
+            <a th:href="@{/}">Back to Landing Page</a>
+        </div>
+    </main>
+</div>
+</body>
+</html>

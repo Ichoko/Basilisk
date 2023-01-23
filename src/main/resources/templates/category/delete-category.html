@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body  class="main-body">
+<nav th:replace="~{layout :: navigation}"></nav>
+<header th:replace="~{layout :: header ('Fail To Delete')}"></header>
+<main>
+    <div class="fail-container">
+        <p>Masih Ada <span th:text="${dependecies}"></span> product(s) pada database yang masuk dalam kategory ini </p>
+        <p>Tidak Bisa menghapus kategori ini, Silahkan Pastikan Sebelum menghapus kategory
+            tidak ada product(s) dalam kategori ini</p>
+    </div>
+    <a class="blue-button" th:href="@{/category/index}">back to index</a>
+</main>
+<footer th:replace="~{layout :: footer}"></footer>
+<th:block th:replace = "~{layout :: javascript}"></th:block>
+
+</body>
+</html>
